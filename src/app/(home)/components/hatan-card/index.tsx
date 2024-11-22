@@ -33,8 +33,8 @@ export default function HantanCard({
           <MessageCircle size={30} color="#540075" className="cursor-pointer" />
           <span>10</span>
         </li>
-        <li className={cn('common-icon', 'cursor-default')}>
-          <Eye size={30} color="#540075" className="cursor-pointer" />
+        <li className="common-icon">
+          <Eye size={30} color="#540075" className="cursor-default" />
           <span>1000</span>
         </li>
       </ul>

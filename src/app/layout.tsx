@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import { Providers } from '@/providers'
+import { Bell, Menu } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -31,7 +34,25 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <main className={'container'}>{children}</main>
+          <main className={'container'}>
+            <header className="flex justify-between items-center">
+              <Link href={'/'}>
+                <Menu size={35} strokeWidth={2} color="#540075" />
+              </Link>
+              <Link href={'/'}>
+                <Image
+                  src={'/hantan_logo.png'}
+                  alt="Logo"
+                  width={200}
+                  height={100}
+                />
+              </Link>
+              <Link href={'/'}>
+                <Bell size={30} strokeWidth={2} color="#540075" />
+              </Link>
+            </header>
+            {children}
+          </main>
         </Providers>
       </body>
     </html>

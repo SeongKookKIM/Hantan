@@ -1,15 +1,10 @@
-import { PropsWithChildren, Suspense } from 'react'
+import { PropsWithChildren } from 'react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Hantan Home',
-  description: 'Hatan Main Home',
+  title: 'Hantan',
+  description: 'Hatan Launch Screen!',
 }
-
-export default function HomeLayout({ children }: PropsWithChildren) {
-  return (
-    <main className={'py-10'}>
-      <Suspense>{children}</Suspense>
-    </main>
-  )
+export default function LaunchScreenLayout({ children }: PropsWithChildren) {
+  return <main>{children}</main>
 }

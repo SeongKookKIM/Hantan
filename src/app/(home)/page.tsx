@@ -1,34 +1,27 @@
 'use client'
 
-import HantanCardList from './components/hantan-list'
-import HantanCard from './components/hatan-card'
+import Image from 'next/image'
+import { useLaunchScreen } from './hooks/use-launchScreen'
 
-export default function Home() {
-  const newDate = (): string => {
-    const todayDate = new Date()
+export default function LaunchScreen() {
+  // 런치스크린 실행
+  useLaunchScreen()
 
-    const year = todayDate.getFullYear()
-    const month = String(todayDate.getMonth() + 1).padStart(2, '0')
-    const day = String(todayDate.getDate()).padStart(2, '0')
-
-    const formattedDate = `${year}-${month}-${day}`
-
-    return formattedDate
-  }
   return (
-    <main className="mt-5">
-      <div>
-        <label className={'text-2xl font-bold'}>베스트 한탄</label>
-        <HantanCard />
-      </div>
-
-      <div className="mt-10">
-        <label className={'text-2xl font-bold flex gap-2 items-end'}>
-          오늘의 한탄
-          <span className="text-lg text-secondary">({newDate()})</span>
-        </label>
-        <HantanCardList />
-      </div>
+    <main
+      className={
+        'w-full absolute top-0 left-0 h-screen z-10 bg-secondary flex items-center justify-center'
+      }
+    >
+      <Image
+        src={'/hantan_logo.png'}
+        alt="Logo"
+        width={250}
+        height={100}
+        className={
+          'animate-fade-up animate-duration-[2000ms] animate-delay-500 animate-ease-linear'
+        }
+      />
     </main>
   )
 }

@@ -30,4 +30,7 @@ body {
   textArea {
     @apply resize-none py-3 px-4 block w-full min-h-52 border-2 rounded-lg focus:outline-none text-2xl text-white bg-secondary overflow-hidden mt-4;
   }
+  .common-icon {
+    @apply flex gap-1 items-center text-xl cursor-default;
+  }
 }

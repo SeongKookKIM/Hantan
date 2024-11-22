@@ -1,6 +1,7 @@
 import { useState, type HTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 import { useTextArea } from '../../hooks/use-textarea-height'
+import { Eye, Heart, MessageCircle } from 'lucide-react'
 
 export default function HantanCard({
   className,
@@ -21,6 +22,22 @@ export default function HantanCard({
         defaultValue={text}
         readOnly={true}
       ></textarea>
+
+      {/* Like, Comment, Watched */}
+      <ul className="flex gap-4 mt-3">
+        <li className="common-icon">
+          <Heart size={30} color="#540075" className="cursor-pointer" />
+          <span>5</span>
+        </li>
+        <li className="common-icon">
+          <MessageCircle size={30} color="#540075" className="cursor-pointer" />
+          <span>10</span>
+        </li>
+        <li className={cn('common-icon', 'cursor-default')}>
+          <Eye size={30} color="#540075" className="cursor-pointer" />
+          <span>1000</span>
+        </li>
+      </ul>
     </main>
   )
 }

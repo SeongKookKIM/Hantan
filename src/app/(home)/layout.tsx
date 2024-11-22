@@ -14,13 +14,13 @@ export default function HomeLayout({ children }: PropsWithChildren) {
     <main className={'py-10'}>
       <header className="flex justify-between items-center">
         <Link href={'/'}>
-          <Menu size={35} strokeWidth={3} color="#540075" />
+          <Menu size={35} strokeWidth={2} color="#540075" />
         </Link>
         <Link href={'/'}>
           <Image src={'/hantan_logo.png'} alt="Logo" width={200} height={100} />
         </Link>
         <Link href={'/'}>
-          <Bell size={30} strokeWidth={3} color="#540075" />
+          <Bell size={30} strokeWidth={2} color="#540075" />
         </Link>
       </header>
       <Suspense>{children}</Suspense>

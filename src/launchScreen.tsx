@@ -1,12 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useLaunchScreen } from './hooks/use-launchScreen'
 
 export default function LaunchScreen() {
-  // 런치스크린 실행
-  useLaunchScreen()
-
   return (
     <main
       className={

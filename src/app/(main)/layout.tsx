@@ -13,7 +13,7 @@ export default function MainLayout({ children }: PropsWithChildren) {
   return (
     <main className={'container max-w-[700] pb-10'}>
       <header className="flex justify-between items-center">
-        <Link href={'/'}>
+        <Link href={'/login'}>
           <Menu size={35} strokeWidth={2} color="#540075" />
         </Link>
         <Link href={'/'}>

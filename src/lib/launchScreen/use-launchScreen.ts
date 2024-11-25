@@ -1,26 +1,25 @@
 'use client'
 
 import { useSessionStorage } from '@uidotdev/usehooks'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export const useLaunchScreen = () => {
   const [isVisited, setIsVisited] = useSessionStorage('isVisited', false)
-
-  const router = useRouter()
+  const [isLaunching, setIsLaunching] = useState(!isVisited)
 
   useEffect(() => {
     if (!isVisited) {
       const timer = setTimeout(() => {
         setIsVisited(true)
-        router.push('/main')
+        setIsLaunching(false)
       }, 2700)
 
-      return () => {
-        clearTimeout(timer)
-      }
+      return () => clearTimeout(timer)
     } else {
-      router.push('/main')
+      setIsLaunching(false)
     }
   }, [isVisited, setIsVisited])
+
+  return { isLaunching }
 }

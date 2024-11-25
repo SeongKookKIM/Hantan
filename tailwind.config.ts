@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 const config: Config = {
   darkMode: ['class'],
@@ -24,8 +25,39 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      height: {
+        screenVH: 'calc(100vh - 140px)',
+      },
     },
   },
-  plugins: [require('tailwindcss-animated')],
+  plugins: [
+    require('tailwindcss-animated'),
+    plugin(function ({ addComponents }) {
+      addComponents({
+        '.text-area': {
+          resize: 'none',
+          padding: '0.75rem 1rem',
+          display: 'block',
+          width: '100%',
+          minHeight: '13rem',
+          borderWidth: '2px',
+          borderRadius: 'var(--radius)',
+          outline: 'none',
+          fontSize: '1.25rem',
+          backgroundColor: 'hsl(var(--secondary))',
+          overflow: 'hidden',
+          marginTop: '1rem',
+          cursor: 'pointer',
+        },
+        '.common-icon': {
+          display: 'flex',
+          gap: '0.25rem',
+          alignItems: 'center',
+          fontSize: '1.25rem',
+          cursor: 'default',
+        },
+      })
+    }),
+  ],
 }
 export default config

@@ -3,8 +3,14 @@
 import { useFormHook } from '../hooks/use-form'
 
 export default function Login() {
-  const { register, handleSubmit, isSubmitted, isSubmitting, errors } =
-    useFormHook()
+  const {
+    register,
+    handleSubmit,
+    isSubmitted,
+    isSubmitting,
+    errors,
+    handleSubmitForm,
+  } = useFormHook()
 
   return (
     <main
@@ -15,7 +21,10 @@ export default function Login() {
       {/* Login Label */}
       <h4 className={'font-semibold text-xl mb-5'}>Login</h4>
 
-      <form className={'w-full flex flex-col justify-center items-center'}>
+      <form
+        onSubmit={handleSubmit(handleSubmitForm)}
+        className={'w-full flex flex-col justify-center items-center'}
+      >
         {/* ID */}
         <div className={'w-full flex items-center gap-4 px-8'}>
           <label htmlFor="userID" className={'input-label'}>

@@ -82,7 +82,7 @@ const config: Config = {
           textAlign: 'right',
           paddingRight: '2rem',
           color: '#EF4444',
-          fontSize: '1rem',
+          fontSize: '0.85rem',
           fontStyle: 'italic',
           marginTop: '0.25rem',
         },

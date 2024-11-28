@@ -1,6 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { useFormHook } from '../hooks/use-form'
+import { UserLogin } from '@/schemas/user'
 
 export default function Login() {
   const {
@@ -9,8 +11,8 @@ export default function Login() {
     isSubmitted,
     isSubmitting,
     errors,
-    handleSubmitForm,
-  } = useFormHook()
+    handleLoginSubmitForm,
+  } = useFormHook<UserLogin>()
 
   return (
     <main
@@ -19,10 +21,10 @@ export default function Login() {
       }
     >
       {/* Login Label */}
-      <h4 className={'font-semibold text-xl mb-5'}>Login</h4>
+      <h4 className={'font-semibold text-2xl mb-5 text-primary'}>Login</h4>
 
       <form
-        onSubmit={handleSubmit(handleSubmitForm)}
+        onSubmit={handleSubmit(handleLoginSubmitForm)}
         className={'w-full flex flex-col justify-center items-center'}
       >
         {/* ID */}
@@ -72,32 +74,38 @@ export default function Login() {
 
         {/* SignUp, Find ID, PASSWORD */}
         <div className={'mt-10 w-full flex justify-start px-8 gap-3'}>
-          <span className={'text-sm text-secondary cursor-pointer'}>
-            회원가입
-          </span>
-          <span className={'text-sm text-secondary cursor-pointer'}>
-            아이디·비밀번호 찾기
-          </span>
+          <Link href={'/signUp'}>
+            <span className={'text-sm text-secondary cursor-pointer'}>
+              회원가입
+            </span>
+          </Link>
+          <Link href={'/'}>
+            <span className={'text-sm text-secondary cursor-pointer'}>
+              아이디·비밀번호 찾기
+            </span>
+          </Link>
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={
-            'mt-8 w-1/2 rounded py-3 text-xl font-semibold bg-secondary text-white'
-          }
-        >
-          로그인
-        </button>
+        <div className={'mt-8 px-8 w-full'}>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={
+              'w-full rounded py-3 text-xl font-semibold bg-secondary text-white'
+            }
+          >
+            로그인
+          </button>
+        </div>
       </form>
 
       {/* OAuth */}
-      <div className={'px-8 w-full'}>
+      <div className={'px-8 mt-8 w-full'}>
         <button
           type="button"
           className={
-            'mt-8 w-full border-secondary rounded text-xl font-semibold py-3 shadow'
+            'w-full border-secondary rounded text-xl font-semibold py-3 shadow'
           }
         >
           구글로그인

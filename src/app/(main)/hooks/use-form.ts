@@ -1,16 +1,22 @@
-import { UserLogin } from '@/schemas/user'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 
-export const useFormHook = () => {
+export const useFormHook = <T extends FieldValues>() => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { isSubmitted, isSubmitting, errors },
-  } = useForm<UserLogin>()
+  } = useForm<T>()
 
-  const handleSubmitForm = async (data: UserLogin) => {
+  //   Login Submit
+  const handleLoginSubmitForm = async (data: T) => {
     await new Promise((r) => setTimeout(r, 1000))
 
+    console.log(data)
+  }
+
+  // Sign Up Submit
+  const handlerSignUpSubmitForm = async (data: T) => {
     console.log(data)
   }
 
@@ -20,6 +26,8 @@ export const useFormHook = () => {
     isSubmitted,
     isSubmitting,
     errors,
-    handleSubmitForm,
+    watch,
+    handleLoginSubmitForm,
+    handlerSignUpSubmitForm,
   }
 }

@@ -59,7 +59,7 @@ const config: Config = {
         '.input-label': {
           display: 'block',
           width: '7rem',
-          color: 'hsl(0, 0%, 43%)',
+          color: 'hsl(var(--primary))',
           fontSize: '1.125rem',
           fontWeight: '700',
         },

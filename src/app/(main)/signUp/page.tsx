@@ -14,7 +14,7 @@ export default function SignUp() {
     handlerSignUpSubmitForm,
   } = useFormHook<UserSignUp>()
 
-  const password = watch('password', '')
+  const password = watch('userPassword', '')
 
   return (
     <main
@@ -31,18 +31,18 @@ export default function SignUp() {
       >
         {/* ID */}
         <div className={'w-full flex items-center gap-4 px-8'}>
-          <label htmlFor="userID" className={'input-label'}>
+          <label htmlFor="userId" className={'input-label'}>
             아이디
           </label>
           <input
             type="text"
-            id="userID"
+            id="userId"
             placeholder="아이디를 입력해주세요."
             className={'input-field'}
             aria-invalid={
-              isSubmitted ? (errors.id ? 'true' : 'false') : undefined
+              isSubmitted ? (errors.userId ? 'true' : 'false') : undefined
             }
-            {...register('id', {
+            {...register('userId', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/,
@@ -51,8 +51,8 @@ export default function SignUp() {
             })}
           />
         </div>
-        {errors.id && (
-          <p className={'text-error'}>{errors.id.message?.toString()}</p>
+        {errors.userId && (
+          <p className={'text-error'}>{errors.userId.message?.toString()}</p>
         )}
 
         {/* Email */}
@@ -66,9 +66,9 @@ export default function SignUp() {
             placeholder="이메일을 입력해주세요."
             className={'input-field'}
             aria-invalid={
-              isSubmitted ? (errors.email ? 'true' : 'false') : undefined
+              isSubmitted ? (errors.userEmail ? 'true' : 'false') : undefined
             }
-            {...register('email', {
+            {...register('userEmail', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -77,8 +77,8 @@ export default function SignUp() {
             })}
           />
         </div>
-        {errors.email && (
-          <p className={'text-error'}>{errors.email.message?.toString()}</p>
+        {errors.userEmail && (
+          <p className={'text-error'}>{errors.userEmail.message?.toString()}</p>
         )}
 
         {/* Password */}
@@ -92,9 +92,9 @@ export default function SignUp() {
             className={'input-field placeholder:text-sm'}
             placeholder="숫자+영문자+특수문자 조합으로 8자리 이상"
             aria-invalid={
-              isSubmitted ? (errors.password ? 'true' : 'false') : undefined
+              isSubmitted ? (errors.userPassword ? 'true' : 'false') : undefined
             }
-            {...register('password', {
+            {...register('userPassword', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
@@ -105,8 +105,10 @@ export default function SignUp() {
           />
         </div>
 
-        {errors.password && (
-          <p className={'text-error'}>{errors.password.message?.toString()}</p>
+        {errors.userPassword && (
+          <p className={'text-error'}>
+            {errors.userPassword.message?.toString()}
+          </p>
         )}
 
         {/* Confirm Password */}

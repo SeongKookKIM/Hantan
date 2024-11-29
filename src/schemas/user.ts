@@ -8,9 +8,9 @@ export const userLoginSchema = z.object({
 export type UserLogin = z.infer<typeof userLoginSchema>
 
 export const userSignUpSchema = z.object({
-  id: z.string(),
-  email: z.string().email(),
-  password: z.string(),
+  userId: z.string(),
+  userEmail: z.string().email(),
+  userPassword: z.string(),
   confirmPassword: z.string(),
 })
 

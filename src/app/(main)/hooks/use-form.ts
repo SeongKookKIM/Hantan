@@ -17,7 +17,23 @@ export const useFormHook = <T extends FieldValues>() => {
 
   // Sign Up Submit
   const handlerSignUpSubmitForm = async (data: T) => {
+    await new Promise((r) => setTimeout(r, 1000))
     console.log(data)
+
+    try {
+      const response = await fetch('/api/users/signUp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const result = await response.json()
+      console.log(result)
+    } catch (error) {
+      console.warn('SignUP Error', error)
+    }
   }
 
   return {

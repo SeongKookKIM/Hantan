@@ -10,7 +10,7 @@ export type UserLogin = z.infer<typeof userLoginSchema>
 export const userSignUpSchema = z.object({
   userId: z.string(),
   userEmail: z.string().email(),
-  userPassword: z.string(),
+  password: z.string(),
   confirmPassword: z.string(),
 })
 

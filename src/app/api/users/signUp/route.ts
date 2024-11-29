@@ -1,13 +1,17 @@
 import { db } from '@/lib/database'
 import { NextRequest, NextResponse } from 'next/server'
+import bcrypt from 'bcryptjs'
 
 export async function POST(req: NextRequest) {
   try {
-    const { userId, userEmail, userPassword } = await req.json()
-    console.log(userId, userEmail, userPassword)
+    const { userId, userEmail, password } = await req.json()
+    console.log(userId, userEmail, password)
+
+    const userPassword = bcrypt.hashSync(password, 10)
+    console.log('password:', userPassword)
 
     const [result] = await db.query(
-      'INSERT INTO posts (title, content) VALUES (?, ?)',
+      'INSERT INTO Users (userId, userEmail, userPassword) VALUES (?, ?, ?)',
       [userId, userEmail, userPassword]
     )
 
@@ -17,5 +21,10 @@ export async function POST(req: NextRequest) {
     )
   } catch (error) {
     console.error('Users SignUp Error', error)
+
+    return NextResponse.json(
+      { message: '회원가입 중 문제가 발생했습니다.' },
+      { status: 500 }
+    )
   }
 }

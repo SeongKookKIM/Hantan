@@ -14,7 +14,7 @@ export default function SignUp() {
     handlerSignUpSubmitForm,
   } = useFormHook<UserSignUp>()
 
-  const password = watch('userPassword', '')
+  const password = watch('password', '')
 
   return (
     <main
@@ -92,9 +92,9 @@ export default function SignUp() {
             className={'input-field placeholder:text-sm'}
             placeholder="숫자+영문자+특수문자 조합으로 8자리 이상"
             aria-invalid={
-              isSubmitted ? (errors.userPassword ? 'true' : 'false') : undefined
+              isSubmitted ? (errors.password ? 'true' : 'false') : undefined
             }
-            {...register('userPassword', {
+            {...register('password', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
@@ -105,10 +105,8 @@ export default function SignUp() {
           />
         </div>
 
-        {errors.userPassword && (
-          <p className={'text-error'}>
-            {errors.userPassword.message?.toString()}
-          </p>
+        {errors.password && (
+          <p className={'text-error'}>{errors.password.message?.toString()}</p>
         )}
 
         {/* Confirm Password */}

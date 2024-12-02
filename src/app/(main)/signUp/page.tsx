@@ -22,7 +22,7 @@ export default function SignUp() {
         'h-screenVH min-h-[600] flex flex-col justify-center items-center gap-5 relative'
       }
     >
-      {/* Login Label */}
+      {/* SignUp Label */}
       <h4 className={'font-semibold text-2xl mb-5 text-primary'}>SignUp</h4>
 
       <form

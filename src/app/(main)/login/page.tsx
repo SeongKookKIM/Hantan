@@ -79,7 +79,7 @@ export default function Login() {
               회원가입
             </span>
           </Link>
-          <Link href={'/'}>
+          <Link href={'/findUser'}>
             <span className={'text-sm text-secondary cursor-pointer'}>
               아이디·비밀번호 찾기
             </span>
@@ -92,7 +92,7 @@ export default function Login() {
             type="submit"
             disabled={isSubmitting}
             className={
-              'w-full rounded py-3 text-xl font-semibold bg-secondary text-white'
+              'w-full rounded py-3 text-xl font-semibold bg-primary text-white'
             }
           >
             로그인

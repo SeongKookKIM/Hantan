@@ -15,3 +15,9 @@ export const userSignUpSchema = z.object({
 })
 
 export type UserSignUp = z.infer<typeof userSignUpSchema>
+
+export const userFindIdSchema = z.object({
+  userEmail: z.string().email(),
+})
+
+export type UserFindId = z.infer<typeof userFindIdSchema>

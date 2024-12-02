@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
     console.log(userId, userEmail, password)
 
     const userPassword = bcrypt.hashSync(password, 10)
-    console.log('password:', userPassword)
 
     const [result] = await db.query(
       'INSERT INTO Users (userId, userEmail, userPassword) VALUES (?, ?, ?)',

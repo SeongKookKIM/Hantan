@@ -1,6 +1,9 @@
+import { useRouter } from 'next/navigation'
 import { FieldValues, useForm } from 'react-hook-form'
 
 export const useFormHook = <T extends FieldValues>() => {
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -18,7 +21,6 @@ export const useFormHook = <T extends FieldValues>() => {
   // Sign Up Submit
   const handlerSignUpSubmitForm = async (data: T) => {
     await new Promise((r) => setTimeout(r, 1000))
-    console.log(data)
 
     try {
       const response = await fetch('/api/users/signUp', {
@@ -30,7 +32,10 @@ export const useFormHook = <T extends FieldValues>() => {
       })
 
       const result = await response.json()
-      console.log(result)
+
+      if (window.confirm(result.message)) {
+        router.push('/login')
+      }
     } catch (error) {
       console.warn('SignUP Error', error)
     }

@@ -80,6 +80,61 @@ export const useFormHook = <T extends FieldValues>() => {
     }
   }
 
+  // User Find Password
+  const handlerFindUserPassword = async (data: T) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
+    try {
+      const response = await fetch('/api/users/findPassword', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      const result = await response.json()
+
+      switch (response.status) {
+        case 201:
+          router.push(`/findUser/password/reset?id=${result.data.id}`)
+          break
+        default:
+          alert(result.message)
+      }
+    } catch (error) {
+      console.warn('Find Password Error', error)
+    }
+  }
+
+  // User Reset Password
+  const handlerResetPassword = async (data: T, id: string | null) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
+    try {
+      const response = await fetch('/api/users/findPassword/reset', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+          id,
+        }),
+      })
+      const result = await response.json()
+
+      switch (response.status) {
+        case 201:
+          router.push(`/login`)
+          break
+        default:
+          alert(result.message)
+      }
+    } catch (error) {
+      console.warn('Reset Password Error', error)
+    }
+  }
+
   return {
     register,
     handleSubmit,
@@ -90,6 +145,8 @@ export const useFormHook = <T extends FieldValues>() => {
     handleLoginSubmitForm,
     handlerSignUpSubmitForm,
     handlerFindUserId,
+    handlerFindUserPassword,
+    handlerResetPassword,
     isFind,
     findUserId,
   }

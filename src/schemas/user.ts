@@ -21,3 +21,16 @@ export const userFindIdSchema = z.object({
 })
 
 export type UserFindId = z.infer<typeof userFindIdSchema>
+
+export const userFindPasswordSchema = z.object({
+  userId: z.string(),
+  userEmail: z.string().email(),
+})
+
+export type UserFindPassword = z.infer<typeof userFindPasswordSchema>
+
+export const userResetPasswordSchema = z.object({
+  password: z.string(),
+  confirmPassword: z.string(),
+})
+export type UserResetPassword = z.infer<typeof userResetPasswordSchema>

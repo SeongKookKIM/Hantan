@@ -1,12 +1,39 @@
 import { db } from '@/lib/database'
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
+import { RowDataPacket } from 'mysql2'
 
 export async function POST(req: NextRequest) {
   try {
     const { userId, userEmail, password } = await req.json()
-    console.log(userId, userEmail, password)
 
+    // userId가 존재할 경우
+    const [existUserId] = await db.query<RowDataPacket[]>(
+      'SELECT * FROM Users WHERE userId = ?',
+      [userId]
+    )
+
+    if (existUserId.length > 0) {
+      return NextResponse.json(
+        { message: '이미 존재하는 사용자 ID 입니다.' },
+        { status: 403 }
+      )
+    }
+
+    // userEmail 이 존재할 경우
+    const [existUserEmail] = await db.query<RowDataPacket[]>(
+      'SELECT * FROM Users WHERE userEmail = ?',
+      [userEmail]
+    )
+
+    if (existUserEmail.length > 0) {
+      return NextResponse.json(
+        { message: '이미 존재하는 사용자 Email 입니다.' },
+        { status: 403 }
+      )
+    }
+
+    // 데이터 저장
     const userPassword = bcrypt.hashSync(password, 10)
 
     const [result] = await db.query(

@@ -33,8 +33,14 @@ export const useFormHook = <T extends FieldValues>() => {
 
       const result = await response.json()
 
-      if (window.confirm(result.message)) {
-        router.push('/login')
+      switch (response.status) {
+        case 201:
+          if (window.confirm(result.message)) {
+            router.push('/login')
+          }
+          break
+        default:
+          window.confirm(result.message)
       }
     } catch (error) {
       console.warn('SignUP Error', error)

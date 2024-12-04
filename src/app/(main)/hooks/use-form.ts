@@ -1,10 +1,10 @@
+import { usePostMutation } from '@/action/post-action'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
 export const useFormHook = <T extends FieldValues>() => {
   const router = useRouter()
-
   const [isFind, setIsFind] = useState<boolean>(false)
   const [findUserId, setFindUserId] = useState<string>()
 
@@ -15,124 +15,79 @@ export const useFormHook = <T extends FieldValues>() => {
     formState: { isSubmitted, isSubmitting, errors },
   } = useForm<T>()
 
-  //   Login Submit
-  const handleLoginSubmitForm = async (data: T) => {
-    await new Promise((r) => setTimeout(r, 1000))
+  const { mutate } = usePostMutation<T, any>()
 
+  // Login Submit
+  const handleLoginSubmitForm = async (data: T) => {
     console.log(data)
   }
 
   // Sign Up Submit
   const handlerSignUpSubmitForm = async (data: T) => {
-    await new Promise((r) => setTimeout(r, 1000))
-
-    try {
-      const response = await fetch('/api/users/signUp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-
-      const result = await response.json()
-
-      switch (response.status) {
-        case 201:
+    await mutate(
+      { url: '/api/users/signUp', body: data },
+      {
+        onSuccess: (result) => {
           if (window.confirm(result.message)) {
             router.push('/login')
           }
-          break
-        default:
-          window.confirm(result.message)
+        },
+        onError: (error) => {
+          console.warn('Sign Up Error:', error)
+          alert(error.message)
+        },
       }
-    } catch (error) {
-      console.warn('SignUP Error', error)
-    }
+    )
   }
 
   // User Find ID
   const handlerFindUserId = async (data: T) => {
-    await new Promise((r) => setTimeout(r, 1000))
-
-    try {
-      const response = await fetch('/api/users/findId', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-
-      const result = await response.json()
-
-      switch (response.status) {
-        case 201:
+    await mutate(
+      { url: '/api/users/findId', body: data },
+      {
+        onSuccess: (result) => {
           setIsFind(true)
-          setFindUserId(result.userId)
-          break
-        default:
+          setFindUserId(result.userId || '')
+        },
+        onError: (error) => {
           setIsFind(true)
           setFindUserId('')
+          console.warn('Find ID Error:', error)
+        },
       }
-    } catch (error) {
-      console.warn('Find ID Error', error)
-    }
+    )
   }
 
   // User Find Password
   const handlerFindUserPassword = async (data: T) => {
-    await new Promise((r) => setTimeout(r, 1000))
-
-    try {
-      const response = await fetch('/api/users/findPassword', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      const result = await response.json()
-
-      switch (response.status) {
-        case 201:
+    await mutate(
+      { url: '/api/users/findPassword', body: data },
+      {
+        onSuccess: (result) => {
           router.push(`/findUser/password/reset?id=${result.data.id}`)
-          break
-        default:
-          alert(result.message)
+        },
+        onError: (error) => {
+          console.warn('Find Password Error:', error)
+          alert(error.message)
+        },
       }
-    } catch (error) {
-      console.warn('Find Password Error', error)
-    }
+    )
   }
 
   // User Reset Password
   const handlerResetPassword = async (data: T, id: string | null) => {
-    await new Promise((r) => setTimeout(r, 1000))
-
-    try {
-      const response = await fetch('/api/users/findPassword/reset', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    await mutate(
+      { url: '/api/users/findPassword/reset', body: { ...data, id } },
+      {
+        onSuccess: () => {
+          router.push('/login')
         },
-        body: JSON.stringify({
-          ...data,
-          id,
-        }),
-      })
-      const result = await response.json()
-
-      switch (response.status) {
-        case 201:
-          router.push(`/login`)
-          break
-        default:
-          alert(result.message)
+        onError: (error) => {
+          console.warn('Reset Password Error:', error)
+          alert(error.message)
+        },
       }
-    } catch (error) {
-      console.warn('Reset Password Error', error)
-    }
+    )
   }
 
   return {

@@ -1,6 +1,6 @@
 'use client'
 
-import LaunchScreen from '@/launchScreen'
+import LaunchScreen from '@/app/launchScreen'
 import { useLaunchScreen } from '@/lib/launchScreen/use-launchScreen'
 import { PropsWithChildren } from 'react'
 import { Providers } from '@/providers'

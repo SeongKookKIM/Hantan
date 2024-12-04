@@ -1,17 +1,16 @@
 'use client'
 
-import { useSessionStorage } from '@uidotdev/usehooks'
-import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export const useLaunchScreen = () => {
-  const [isVisited, setIsVisited] = useSessionStorage('isVisited', false)
-  const [isLaunching, setIsLaunching] = useState(!isVisited)
+  const [isLaunching, setIsLaunching] = useState(true)
 
   useEffect(() => {
-    if (!isVisited) {
+    const visited = sessionStorage.getItem('isVisited') === 'true'
+
+    if (!visited) {
       const timer = setTimeout(() => {
-        setIsVisited(true)
+        sessionStorage.setItem('isVisited', 'true')
         setIsLaunching(false)
       }, 2700)
 
@@ -19,7 +18,7 @@ export const useLaunchScreen = () => {
     } else {
       setIsLaunching(false)
     }
-  }, [isVisited, setIsVisited])
+  }, [])
 
   return { isLaunching }
 }

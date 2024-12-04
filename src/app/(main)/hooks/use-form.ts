@@ -19,11 +19,14 @@ export const useFormHook = <T extends FieldValues>() => {
 
   // Login Submit
   const handleLoginSubmitForm = async (data: T) => {
+    await new Promise((r) => setTimeout(r, 1000))
     console.log(data)
   }
 
   // Sign Up Submit
   const handlerSignUpSubmitForm = async (data: T) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
     await mutate(
       { url: '/api/users/signUp', body: data },
       {
@@ -42,6 +45,8 @@ export const useFormHook = <T extends FieldValues>() => {
 
   // User Find ID
   const handlerFindUserId = async (data: T) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
     await mutate(
       { url: '/api/users/findId', body: data },
       {
@@ -60,6 +65,8 @@ export const useFormHook = <T extends FieldValues>() => {
 
   // User Find Password
   const handlerFindUserPassword = async (data: T) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
     await mutate(
       { url: '/api/users/findPassword', body: data },
       {
@@ -76,6 +83,8 @@ export const useFormHook = <T extends FieldValues>() => {
 
   // User Reset Password
   const handlerResetPassword = async (data: T, id: string | null) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
     await mutate(
       { url: '/api/users/findPassword/reset', body: { ...data, id } },
       {

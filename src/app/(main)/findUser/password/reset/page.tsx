@@ -1,5 +1,8 @@
 'use client'
 
+import InputField from '@/app/(main)/components/input-field'
+import ErrorMessage from '@/app/(main)/components/input-field-error'
+import InputLabel from '@/app/(main)/components/input-field-label'
 import { useFormHook } from '@/app/(main)/hooks/use-form'
 import { UserResetPassword } from '@/schemas/user'
 import { useSearchParams } from 'next/navigation'
@@ -37,18 +40,13 @@ export default function PasswordReset() {
       >
         {/* Password */}
         <div className={'w-full flex items-center gap-4 px-8 mt-10'}>
-          <label htmlFor="userPassword" className={'input-label'}>
-            Password
-          </label>
-          <input
+          <InputLabel htmlFor="userPassword" content="Password" />
+          <InputField
             type="password"
             id="userPassword"
-            className={'input-field placeholder:text-sm'}
+            className="placeholder:text-sm"
             placeholder="숫자+영문자+특수문자 조합으로 8자리 이상"
-            aria-invalid={
-              isSubmitted ? (errors.password ? 'true' : 'false') : undefined
-            }
-            {...register('password', {
+            register={register('password', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
@@ -56,43 +54,29 @@ export default function PasswordReset() {
                   '* 숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.',
               },
             })}
+            error={errors.password}
+            isSubmitted={isSubmitted}
           />
         </div>
-
-        {errors.password && (
-          <p className={'text-error'}>{errors.password.message?.toString()}</p>
-        )}
+        <ErrorMessage error={errors.password} />
 
         {/* Confirm Password */}
         <div className={'w-full flex items-center gap-4 px-8 mt-10'}>
-          <label htmlFor="userConfirmPassword" className={'input-label'}>
-            Confirm
-          </label>
-          <input
+          <InputLabel htmlFor="userConfirmPassword" content="Confirm" />
+          <InputField
             type="password"
             id="userConfirmPassword"
-            className={'input-field'}
             placeholder="비밀번호 재확인"
-            aria-invalid={
-              isSubmitted
-                ? errors.confirmPassword
-                  ? 'true'
-                  : 'false'
-                : undefined
-            }
-            {...register('confirmPassword', {
+            register={register('confirmPassword', {
               required: '* 필수 입력란입니다.',
               validate: (value) =>
                 value === password || '* 비밀번호가 일치하지 않습니다.',
             })}
+            error={errors.confirmPassword}
+            isSubmitted={isSubmitted}
           />
         </div>
-
-        {errors.confirmPassword && (
-          <p className={'text-error'}>
-            {errors.confirmPassword.message?.toString()}
-          </p>
-        )}
+        <ErrorMessage error={errors.confirmPassword} />
 
         {/* Submit Button */}
         <div className={'mt-8 px-8 w-full'}>

@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import { useFormHook } from '../hooks/use-form'
 import { UserLogin } from '@/schemas/user'
+import InputField from '../components/input-field'
+import ErrorMessage from '../components/input-field-error'
+import InputLabel from '../components/input-field-label'
 
 export default function Login() {
   const {
@@ -29,48 +32,35 @@ export default function Login() {
       >
         {/* ID */}
         <div className={'w-full flex items-center gap-4 px-8'}>
-          <label htmlFor="userID" className={'input-label'}>
-            아이디
-          </label>
-          <input
+          <InputLabel htmlFor="userId" content="아이디" />
+          <InputField
             type="text"
-            id="userID"
+            id="userId"
             placeholder="아이디를 입력해주세요."
-            className={'input-field'}
-            aria-invalid={
-              isSubmitted ? (errors.id ? 'true' : 'false') : undefined
-            }
-            {...register('id', {
-              required: '*아이디를 입력해주세요.',
+            error={errors.userId}
+            register={register('userId', {
+              required: '* 아이디를 입력해주세요.',
             })}
+            isSubmitted={isSubmitted}
           />
         </div>
-        {errors.id && (
-          <p className={'text-error'}>{errors.id.message?.toString()}</p>
-        )}
+        <ErrorMessage error={errors.userId} />
 
         {/* Password */}
         <div className={'w-full flex items-center gap-4 px-8 mt-10'}>
-          <label htmlFor="userPassword" className={'input-label'}>
-            Password
-          </label>
-          <input
+          <InputLabel htmlFor="userPassword" content="Password" />
+          <InputField
             type="password"
             id="userPassword"
-            className={'input-field'}
             placeholder="비밀번호를 입력해주세요."
-            aria-invalid={
-              isSubmitted ? (errors.password ? 'true' : 'false') : undefined
-            }
-            {...register('password', {
+            error={errors.password}
+            register={register('password', {
               required: '* 비밀번호를 입력해주세요.',
             })}
+            isSubmitted={isSubmitted}
           />
         </div>
-
-        {errors.password && (
-          <p className={'text-error'}>{errors.password.message?.toString()}</p>
-        )}
+        <ErrorMessage error={errors.password} />
 
         {/* SignUp, Find ID, PASSWORD */}
         <div className={'mt-10 w-full flex justify-start px-8 gap-3'}>

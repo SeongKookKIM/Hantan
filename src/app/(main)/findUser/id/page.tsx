@@ -2,8 +2,9 @@
 
 import { UserFindId } from '@/schemas/user'
 import { useFormHook } from '../../hooks/use-form'
-import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import InputField from '../../components/input-field'
+import ErrorMessage from '../../components/input-field-error'
 
 export default function FIndId() {
   const {
@@ -33,22 +34,21 @@ export default function FIndId() {
         <label className={'block font-semibold mb-3'}>
           회원가입한 이메일을 입력해주세요
         </label>
+
         <div className="flex gap-10">
-          <input
+          <InputField
             type="text"
             id="userEmail"
             placeholder="이메일을 입력해주세요."
-            className={'input-field'}
-            aria-invalid={
-              isSubmitted ? (errors.userEmail ? 'true' : 'false') : undefined
-            }
-            {...register('userEmail', {
+            register={register('userEmail', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                 message: '* 올바른 이메일 주소를 입력하세요.',
               },
             })}
+            error={errors.userEmail}
+            isSubmitted={isSubmitted}
           />
           <button
             type="submit"
@@ -58,11 +58,7 @@ export default function FIndId() {
             입력
           </button>
         </div>
-        {errors.userEmail && (
-          <p className={cn('text-error', 'text-left')}>
-            {errors.userEmail.message?.toString()}
-          </p>
-        )}
+        <ErrorMessage error={errors.userEmail} className="text-left" />
       </form>
 
       {/* Result */}

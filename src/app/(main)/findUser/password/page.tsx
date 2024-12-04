@@ -2,6 +2,9 @@
 
 import { UserFindPassword } from '@/schemas/user'
 import { useFormHook } from '../../hooks/use-form'
+import InputField from '../../components/input-field'
+import ErrorMessage from '../../components/input-field-error'
+import InputLabel from '../../components/input-field-label'
 
 export default function FindPassword() {
   const {
@@ -30,57 +33,43 @@ export default function FindPassword() {
       >
         {/* ID */}
         <div className={'w-full flex items-center gap-4 px-8'}>
-          <label htmlFor="userId" className={'input-label'}>
-            아이디
-          </label>
-          <input
+          <InputLabel htmlFor="userId" content="아이디" />
+          <InputField
             type="text"
             id="userId"
             placeholder="아이디를 입력해주세요."
-            className={'input-field'}
-            aria-invalid={
-              isSubmitted ? (errors.userId ? 'true' : 'false') : undefined
-            }
-            {...register('userId', {
+            register={register('userId', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/,
                 message: '* 영어와 숫자를 포함한 아이디를 입력해주세요.',
               },
             })}
+            error={errors.userId}
+            isSubmitted={isSubmitted}
           />
         </div>
-        {errors.userId && (
-          <p className={'text-error'}>{errors.userId.message?.toString()}</p>
-        )}
+        <ErrorMessage error={errors.userId} />
 
         {/* Email */}
         <div className={'w-full flex items-center gap-4 px-8 mt-10'}>
-          <label htmlFor="userEmail" className={'input-label'}>
-            E-mail
-          </label>
-          <input
+          <InputLabel htmlFor="userEmail" content="E-mail" />
+          <InputField
             type="text"
             id="userEmail"
             placeholder="이메일을 입력해주세요."
-            className={'input-field'}
-            aria-invalid={
-              isSubmitted ? (errors.userEmail ? 'true' : 'false') : undefined
-            }
-            {...register('userEmail', {
+            register={register('userEmail', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                 message: '* 올바른 이메일 주소를 입력하세요.',
               },
             })}
+            error={errors.userEmail}
+            isSubmitted={isSubmitted}
           />
         </div>
-        {errors.userEmail && (
-          <p className={'text-error'}>{errors.userEmail.message?.toString()}</p>
-        )}
-
-        {/* Error Message */}
+        <ErrorMessage error={errors.userEmail} />
 
         {/* Submit Button */}
         <div className={'mt-10 px-8 w-full'}>

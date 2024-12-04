@@ -2,6 +2,9 @@
 
 import { UserSignUp } from '@/schemas/user'
 import { useFormHook } from '../hooks/use-form'
+import InputField from '../components/input-field'
+import ErrorMessage from '../components/input-field-error'
+import InputLabel from '../components/input-field-label'
 
 export default function SignUp() {
   const {
@@ -31,70 +34,53 @@ export default function SignUp() {
       >
         {/* ID */}
         <div className={'w-full flex items-center gap-4 px-8'}>
-          <label htmlFor="userId" className={'input-label'}>
-            아이디
-          </label>
-          <input
+          <InputLabel htmlFor="userId" content="아이디" />
+          <InputField
             type="text"
             id="userId"
             placeholder="아이디를 입력해주세요."
-            className={'input-field'}
-            aria-invalid={
-              isSubmitted ? (errors.userId ? 'true' : 'false') : undefined
-            }
-            {...register('userId', {
+            register={register('userId', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/,
                 message: '* 영어와 숫자를 포함한 아이디를 입력해주세요.',
               },
             })}
+            error={errors.userId}
+            isSubmitted={isSubmitted}
           />
         </div>
-        {errors.userId && (
-          <p className={'text-error'}>{errors.userId.message?.toString()}</p>
-        )}
+        <ErrorMessage error={errors.userId} />
 
         {/* Email */}
         <div className={'w-full flex items-center gap-4 px-8 mt-10'}>
-          <label htmlFor="userEmail" className={'input-label'}>
-            E-mail
-          </label>
-          <input
+          <InputLabel htmlFor="userEmail" content="E-mail" />
+          <InputField
             type="text"
             id="userEmail"
             placeholder="이메일을 입력해주세요."
-            className={'input-field'}
-            aria-invalid={
-              isSubmitted ? (errors.userEmail ? 'true' : 'false') : undefined
-            }
-            {...register('userEmail', {
+            register={register('userEmail', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                 message: '* 올바른 이메일 주소를 입력하세요.',
               },
             })}
+            error={errors.userEmail}
+            isSubmitted={isSubmitted}
           />
         </div>
-        {errors.userEmail && (
-          <p className={'text-error'}>{errors.userEmail.message?.toString()}</p>
-        )}
+        <ErrorMessage error={errors.userEmail} />
 
         {/* Password */}
         <div className={'w-full flex items-center gap-4 px-8 mt-10'}>
-          <label htmlFor="userPassword" className={'input-label'}>
-            Password
-          </label>
-          <input
+          <InputLabel htmlFor="userPassword" content="Password" />
+          <InputField
             type="password"
             id="userPassword"
-            className={'input-field placeholder:text-sm'}
+            className="placeholder:text-sm"
             placeholder="숫자+영문자+특수문자 조합으로 8자리 이상"
-            aria-invalid={
-              isSubmitted ? (errors.password ? 'true' : 'false') : undefined
-            }
-            {...register('password', {
+            register={register('password', {
               required: '* 필수 입력란입니다.',
               pattern: {
                 value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
@@ -102,43 +88,29 @@ export default function SignUp() {
                   '* 숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요.',
               },
             })}
+            error={errors.password}
+            isSubmitted={isSubmitted}
           />
         </div>
-
-        {errors.password && (
-          <p className={'text-error'}>{errors.password.message?.toString()}</p>
-        )}
+        <ErrorMessage error={errors.password} />
 
         {/* Confirm Password */}
         <div className={'w-full flex items-center gap-4 px-8 mt-10'}>
-          <label htmlFor="userConfirmPassword" className={'input-label'}>
-            Confirm
-          </label>
-          <input
+          <InputLabel htmlFor="userConfirmPassword" content="Confirm" />
+          <InputField
             type="password"
             id="userConfirmPassword"
-            className={'input-field'}
             placeholder="비밀번호 재확인"
-            aria-invalid={
-              isSubmitted
-                ? errors.confirmPassword
-                  ? 'true'
-                  : 'false'
-                : undefined
-            }
-            {...register('confirmPassword', {
+            register={register('confirmPassword', {
               required: '* 필수 입력란입니다.',
               validate: (value) =>
                 value === password || '* 비밀번호가 일치하지 않습니다.',
             })}
+            error={errors.confirmPassword}
+            isSubmitted={isSubmitted}
           />
         </div>
-
-        {errors.confirmPassword && (
-          <p className={'text-error'}>
-            {errors.confirmPassword.message?.toString()}
-          </p>
-        )}
+        <ErrorMessage error={errors.confirmPassword} />
 
         {/* Submit Button */}
         <div className={'mt-8 px-8 w-full'}>

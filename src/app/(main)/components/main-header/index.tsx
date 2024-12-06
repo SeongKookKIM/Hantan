@@ -3,14 +3,14 @@
 import { Bell, Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useAuth } from '@/action/get-auth'
+import { useAuth } from '../../hooks/use-auth'
 
 export function MainHeader() {
-  const auth = useAuth()
+  const { data } = useAuth()
 
   return (
     <header className="flex justify-between items-center">
-      <Link href={auth.isLogin ? '/menu' : '/login'}>
+      <Link href={data.isLogin ? '/menu' : '/login'}>
         <Menu size={35} strokeWidth={2} color="#540075" />
       </Link>
       <Link href={'/'}>

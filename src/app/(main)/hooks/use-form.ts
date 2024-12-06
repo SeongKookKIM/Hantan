@@ -1,4 +1,5 @@
 import { usePostMutation } from '@/action/post-action'
+import { UserData } from '@/schemas/user'
 import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -27,7 +28,7 @@ export const useFormHook = <T extends FieldValues>() => {
     await mutate(
       { url: '/api/users/login', body: data },
       {
-        onSuccess: (result) => {
+        onSuccess: (result: UserData) => {
           const { user, isLogin } = result
 
           queryClient.setQueryData(['auth'], { user, isLogin })

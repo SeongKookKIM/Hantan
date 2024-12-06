@@ -34,3 +34,24 @@ export const userResetPasswordSchema = z.object({
   confirmPassword: z.string(),
 })
 export type UserResetPassword = z.infer<typeof userResetPasswordSchema>
+
+export const userDataSchema = z.object({
+  user: z
+    .object({
+      id: z.string(),
+      userId: z.string(),
+      userEmail: z.string().email(),
+    })
+    .nullable(),
+  isLogin: z.boolean(),
+})
+export type UserData = z.infer<typeof userDataSchema>
+
+export const userTokenPayloadSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  userEmail: z.string().email(),
+  iat: z.number(),
+  exp: z.number(),
+})
+export type UserTokenPayload = z.infer<typeof userTokenPayloadSchema>

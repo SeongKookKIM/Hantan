@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useGetAuth } from './use-get-auth'
 
 export const useLaunchScreen = () => {
   const [isLaunching, setIsLaunching] = useState(true)
+  useGetAuth()
 
   useEffect(() => {
     const visited = sessionStorage.getItem('isVisited') === 'true'

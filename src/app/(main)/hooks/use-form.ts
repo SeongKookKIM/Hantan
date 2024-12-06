@@ -1,4 +1,5 @@
 import { usePostMutation } from '@/action/post-action'
+import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
@@ -7,6 +8,8 @@ export const useFormHook = <T extends FieldValues>() => {
   const router = useRouter()
   const [isFind, setIsFind] = useState<boolean>(false)
   const [findUserId, setFindUserId] = useState<string>()
+
+  const queryClient = useQueryClient()
 
   const {
     register,
@@ -20,7 +23,23 @@ export const useFormHook = <T extends FieldValues>() => {
   // Login Submit
   const handleLoginSubmitForm = async (data: T) => {
     await new Promise((r) => setTimeout(r, 1000))
-    console.log(data)
+
+    await mutate(
+      { url: '/api/users/login', body: data },
+      {
+        onSuccess: (result) => {
+          const { user, isLogin } = result
+
+          queryClient.setQueryData(['auth'], { user, isLogin })
+
+          router.push('/')
+        },
+        onError: (error) => {
+          console.log('Login Error', error)
+          alert(error.message)
+        },
+      }
+    )
   }
 
   // Sign Up Submit

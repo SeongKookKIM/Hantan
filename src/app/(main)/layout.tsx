@@ -3,6 +3,8 @@ import { Metadata } from 'next'
 import { Bell, Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useAuth } from '@/action/get-auth'
+import { MainHeader } from './components/main-header'
 
 export const metadata: Metadata = {
   title: 'Hantan Main',
@@ -12,17 +14,7 @@ export const metadata: Metadata = {
 export default function MainLayout({ children }: PropsWithChildren) {
   return (
     <main className={'container max-w-[700] pb-10'}>
-      <header className="flex justify-between items-center">
-        <Link href={'/login'}>
-          <Menu size={35} strokeWidth={2} color="#540075" />
-        </Link>
-        <Link href={'/'}>
-          <Image src={'/hantan_logo.png'} alt="Logo" width={200} height={100} />
-        </Link>
-        <Link href={'/'}>
-          <Bell size={30} strokeWidth={2} color="#540075" />
-        </Link>
-      </header>
+      <MainHeader />
       <Suspense>{children}</Suspense>
     </main>
   )

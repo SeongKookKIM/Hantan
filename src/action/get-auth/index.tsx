@@ -25,8 +25,6 @@ export const getAuth = async (): Promise<UserData> => {
 
     const result = await response.json()
 
-    console.log(result)
-
     // safeParse 결과 처리
     const parsedResult = userDataSchema.safeParse(result)
 

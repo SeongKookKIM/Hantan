@@ -3,7 +3,6 @@ import { RowDataPacket } from 'mysql2'
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { number } from 'zod'
 
 /**
  @params 유저 아이디와 비밀번호 -> 해싱

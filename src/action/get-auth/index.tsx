@@ -8,8 +8,6 @@ export const getAuth = async (): Promise<UserData> => {
     const cookieStore = await cookies()
     const accessToken = cookieStore.get('accessToken')?.value || ''
     const refreshToken = cookieStore.get('refreshToken')?.value || ''
-    console.log('AccessToken:', accessToken)
-    console.log('RefreshToken:', refreshToken)
 
     const response = await fetch(
       'http://localhost:3000/api/users/login/checked',
@@ -26,6 +24,8 @@ export const getAuth = async (): Promise<UserData> => {
     }
 
     const result = await response.json()
+
+    console.log(result)
 
     // safeParse 결과 처리
     const parsedResult = userDataSchema.safeParse(result)

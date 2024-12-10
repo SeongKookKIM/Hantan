@@ -32,8 +32,8 @@ export default function HantanWrite() {
             })}
             isSubmitted={isSubmitted}
           />
-          <ErrorMessage error={errors.title} className="text-left" />
         </div>
+        <ErrorMessage error={errors.title} className="text-left" />
 
         {/* Content */}
         <div className={'mt-5 flex flex-col gap-3'}>
@@ -52,8 +52,8 @@ export default function HantanWrite() {
               required: '* 필수 입력란입니다.',
             })}
           />
-          <ErrorMessage error={errors.content} className="text-left" />
         </div>
+        <ErrorMessage error={errors.content} className="text-left" />
 
         {/* Submit Button */}
         <div className={'my-8 w-full'}>
@@ -64,7 +64,7 @@ export default function HantanWrite() {
               'w-full rounded py-3 text-xl font-semibold bg-primary text-white'
             }
           >
-            로그인
+            작성하기
           </button>
         </div>
       </form>

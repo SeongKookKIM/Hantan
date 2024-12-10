@@ -4,7 +4,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
-import { useTextArea } from './use-textarea-height'
+import { useAuth } from './use-auth'
+import { v4 as uuidv4 } from 'uuid'
 
 export const useFormHook = <T extends FieldValues>() => {
   const router = useRouter()
@@ -12,6 +13,8 @@ export const useFormHook = <T extends FieldValues>() => {
   const [findUserId, setFindUserId] = useState<string>()
 
   const queryClient = useQueryClient()
+  const { data } = useAuth()
+  const authData = data
 
   const {
     register,
@@ -124,7 +127,21 @@ export const useFormHook = <T extends FieldValues>() => {
   const handlerPostWrite = async (data: T) => {
     await new Promise((r) => setTimeout(r, 1000))
 
-    console.log(data)
+    const id = uuidv4()
+    const userId = authData.user?.userId
+
+    await mutate(
+      { url: '/api/posts/write', body: { ...data, id, userId } },
+      {
+        onSuccess: () => {
+          router.push('/')
+        },
+        onError: (error) => {
+          console.warn('Post Write Error:', error)
+          alert(error.message)
+        },
+      }
+    )
   }
 
   return {

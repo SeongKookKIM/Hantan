@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
+import { useTextArea } from './use-textarea-height'
 
 export const useFormHook = <T extends FieldValues>() => {
   const router = useRouter()
@@ -119,6 +120,13 @@ export const useFormHook = <T extends FieldValues>() => {
     )
   }
 
+  // Hantan Write
+  const handlerPostWrite = async (data: T) => {
+    await new Promise((r) => setTimeout(r, 1000))
+
+    console.log(data)
+  }
+
   return {
     register,
     handleSubmit,
@@ -131,6 +139,7 @@ export const useFormHook = <T extends FieldValues>() => {
     handlerFindUserId,
     handlerFindUserPassword,
     handlerResetPassword,
+    handlerPostWrite,
     isFind,
     findUserId,
   }

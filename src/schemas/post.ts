@@ -9,5 +9,10 @@ export const postDetailSchema = z.object({
   watched: z.number(),
   like: z.number(),
 })
-
 export type PostDetail = z.infer<typeof postDetailSchema>
+
+export const postWriteSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+})
+export type PostWrite = z.infer<typeof postWriteSchema>

@@ -21,7 +21,7 @@ export default function HantanCard({
         typeof="text"
         defaultValue={text}
         readOnly={true}
-        className="text-area"
+        className={'text-area'}
       ></textarea>
 
       {/* Like, Comment, Watched */}

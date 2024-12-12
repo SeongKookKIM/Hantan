@@ -1,6 +1,6 @@
 import { usePostMutation } from '@/action/post-action'
 import { UserData } from '@/schemas/user'
-import { useQueryClient } from '@tanstack/react-query'
+import { InfiniteData, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
@@ -134,6 +134,32 @@ export const useFormHook = <T extends FieldValues>() => {
       { url: '/api/posts/write', body: { ...data, id, userId } },
       {
         onSuccess: () => {
+          // 무한 스크롤 캐시 업데이트
+          queryClient.setQueryData(['posts'], (oldData: InfiniteData<any>) => {
+            if (!oldData) return oldData
+
+            return {
+              ...oldData,
+              pages: [
+                [
+                  {
+                    id,
+                    userId,
+                    title: data.title,
+                    content: data.content,
+                    date: new Date().toISOString(),
+                    watched: 0,
+                    likes: [],
+                  },
+                  // 첫 번째 페이지에 새 데이터 추가
+                  ...oldData.pages[0],
+                ],
+                // 나머지 페이지 유지
+                ...oldData.pages.slice(1),
+              ],
+            }
+          })
+
           router.push('/')
         },
         onError: (error) => {

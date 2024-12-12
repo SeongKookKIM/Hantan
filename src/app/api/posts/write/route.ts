@@ -4,12 +4,11 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function POST(req: NextRequest) {
   try {
     const { id, userId, title, content } = await req.json()
-
-    console.log(id, userId, title, content)
+    const likes: number[] = []
 
     const [result] = await db.query(
-      'INSERT INTO Posts (id, userId, title, content) VALUES (?, ?, ?, ?)',
-      [id, userId, title, content]
+      'INSERT INTO Posts (id, userId, title, content, likes) VALUES (?, ?, ?, ?, ?)',
+      [id, userId, title, content, JSON.stringify(likes)]
     )
 
     return NextResponse.json(

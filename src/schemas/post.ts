@@ -7,7 +7,7 @@ export const postDetailSchema = z.object({
   content: z.string(),
   date: z.date(),
   watched: z.number(),
-  like: z.number(),
+  like: z.array(z.number()),
 })
 export type PostDetail = z.infer<typeof postDetailSchema>
 

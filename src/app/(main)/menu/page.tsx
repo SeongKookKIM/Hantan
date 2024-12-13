@@ -5,12 +5,14 @@ import HantanGraph from '../components/hantan-graph'
 import { useAuth } from '../hooks/use-auth'
 
 export default function Menu() {
-  const { logout } = useAuth()
+  const { logout, data: authData } = useAuth()
 
   return (
     <main className={'h-screenVH min-h-[600]'}>
       <div className={'mt-5'}>
-        <h3 className={'text-3xl font-bold'}>익명자3님 반갑습니다!</h3>
+        <h3 className={'text-3xl font-bold'}>
+          익명자{authData.user?.id}님 반갑습니다!
+        </h3>
       </div>
 
       <hr className={'my-5'} />

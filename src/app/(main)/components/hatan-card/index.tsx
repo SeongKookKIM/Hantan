@@ -1,7 +1,8 @@
-import { useState, type HTMLAttributes } from 'react'
+import { type HTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 import { useTextArea } from '../../hooks/use-textarea-height'
 import { Eye, Heart, MessageCircle } from 'lucide-react'
+import { useLike } from '../../hooks/use-like'
 
 export interface HantanCardProps extends HTMLAttributes<HTMLDivElement> {
   id: string
@@ -26,6 +27,8 @@ export default function HantanCard({
 }: HantanCardProps) {
   const { textAreaRef } = useTextArea({ value: content })
 
+  const { isLike, handlerLikeButton, authData } = useLike(likes, id)
+
   return (
     <main className={cn(className)} {...props}>
       <textarea
@@ -40,8 +43,16 @@ export default function HantanCard({
       {/* Like, Comment, Watched */}
       <ul className="flex gap-4 mt-3">
         <li className="common-icon">
-          <Heart size={30} color="#540075" className="cursor-pointer" />
-          <span>{likes.length}</span>
+          <Heart
+            size={30}
+            color="#540075"
+            fill={
+              isLike.includes(authData.user?.id as number) ? '#540075' : 'none'
+            }
+            className="cursor-pointer"
+            onClick={handlerLikeButton}
+          />
+          <span>{isLike.length}</span>
         </li>
         <li className="common-icon">
           <MessageCircle size={30} color="#540075" className="cursor-pointer" />

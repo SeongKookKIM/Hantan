@@ -13,8 +13,7 @@ export const useFormHook = <T extends FieldValues>() => {
   const [findUserId, setFindUserId] = useState<string>()
 
   const queryClient = useQueryClient()
-  const { data } = useAuth()
-  const authData = data
+  const { data: authData } = useAuth()
 
   const {
     register,

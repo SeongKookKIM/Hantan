@@ -8,27 +8,30 @@ import { useDate } from './hooks/use-date'
 export default function Main() {
   const { formattedDate } = useDate()
 
-  const { data, isLoading, error } = useBestHantans()
+  const { data: bestHantan } = useBestHantans()
 
   return (
     <main className="mt-5">
       <div>
         <label className={'text-2xl font-bold'}>베스트 한탄</label>
-        {isLoading && <p>Loading</p>}
-        {error && <p>Error</p>}
-        {data ? (
+
+        {bestHantan ? (
           <HantanCard
-            id={data.id}
-            userId={data.userId}
-            title={data.title}
-            content={data.content}
-            date={data.date}
-            watched={data.watched}
-            likes={data.likes}
+            id={bestHantan.id}
+            userId={bestHantan.userId}
+            title={bestHantan.title}
+            content={bestHantan.content}
+            date={bestHantan.date}
+            watched={bestHantan.watched}
+            likes={bestHantan.likes}
             isBest={true}
           />
         ) : (
-          <p>없음.</p>
+          <div className={'w-full h-[100] flex items-center justify-center'}>
+            <p className={'font-semibold text-lg text-primary'}>
+              금일 베스트 한탄이 존재하지 않습니다...
+            </p>
+          </div>
         )}
       </div>
 

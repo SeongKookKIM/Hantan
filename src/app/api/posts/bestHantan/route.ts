@@ -2,7 +2,7 @@ import { db } from '@/lib/database'
 import { RowDataPacket } from 'mysql2'
 import { NextResponse } from 'next/server'
 
-export async function GET(req: NextResponse) {
+export async function GET() {
   try {
     // 오늘 날짜의 데이터를 가져오고 likes.length + watched 합산이 가장 큰 포스트 반환
     const [rows] = await db.query<RowDataPacket[]>(`

@@ -5,10 +5,8 @@ export const useBestHantans = () => {
     queryKey: ['bestPosts'],
     queryFn: async () => {
       const response = await fetch('/api/posts/bestHantan')
-      console.log('Response status:', response.status)
 
       if (!response.ok) {
-        console.warn('Error??')
         throw new Error('Failed to fetch bestPost Data')
       }
 

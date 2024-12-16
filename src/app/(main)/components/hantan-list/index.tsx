@@ -3,6 +3,7 @@ import HantanCard from '../hatan-card'
 import { cn } from '@/lib/utils'
 import { getHantans } from '@/action/get-hantans'
 import Image from 'next/image'
+import { PostDetail } from '@/schemas/post'
 
 export default function HantanCardList({
   className,
@@ -22,7 +23,7 @@ export default function HantanCardList({
     <main className={cn(className, 'flex flex-col gap-5')} {...props}>
       {data?.pages.map((page, pageIndex) => (
         <React.Fragment key={pageIndex}>
-          {page.map((item: any, index: number) => (
+          {page.map((item: PostDetail, index: number) => (
             <React.Fragment key={index}>
               <HantanCard
                 id={item.id}

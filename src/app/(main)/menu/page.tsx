@@ -26,7 +26,7 @@ export default function Menu() {
           <Link href={'/hantanWrite'}>한탄 작성하기</Link>
         </li>
         <li>
-          <Link href={'/'}>내가 쓴 한탄 보기</Link>
+          <Link href={'/myHantans'}>내가 쓴 한탄 보기</Link>
         </li>
         <li>
           <Link href={'/'}>내가 좋아요 한 한탄보기</Link>

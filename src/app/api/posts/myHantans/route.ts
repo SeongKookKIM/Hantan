@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
     if (rows.length === 0) {
       return NextResponse.json(
         { message: '해당 userId로 저장된 데이터가 없습니다.', data: [] },
-        { status: 404 }
+        { status: 201 }
       )
     }
 

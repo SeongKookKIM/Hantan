@@ -1,8 +1,8 @@
 import { db } from '@/lib/database'
 import { RowDataPacket } from 'mysql2'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export async function GET(req: NextRequest) {
+export async function GET(req: NextResponse) {
   try {
     // 오늘 날짜의 데이터를 가져오고 likes.length + watched 합산이 가장 큰 포스트 반환
     const [rows] = await db.query<RowDataPacket[]>(`
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     `)
 
     if (rows.length === 0) {
-      return NextResponse.json({ data: null }, { status: 301 })
+      return NextResponse.json({ data: null }, { status: 403 })
     }
 
     return NextResponse.json({ data: rows[0] }, { status: 201 })

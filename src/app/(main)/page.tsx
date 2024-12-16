@@ -8,22 +8,22 @@ import { useDate } from './hooks/use-date'
 export default function Main() {
   const { formattedDate } = useDate()
 
-  const { data: bestHantan } = useBestHantans()
+  const { data } = useBestHantans()
 
   return (
     <main className="mt-5">
       <div>
         <label className={'text-2xl font-bold'}>베스트 한탄</label>
 
-        {bestHantan ? (
+        {data ? (
           <HantanCard
-            id={bestHantan.id}
-            userId={bestHantan.userId}
-            title={bestHantan.title}
-            content={bestHantan.content}
-            date={bestHantan.date}
-            watched={bestHantan.watched}
-            likes={bestHantan.likes}
+            id={data.id}
+            userId={data.userId}
+            title={data.title}
+            content={data.content}
+            date={data.date}
+            watched={data.watched}
+            likes={data.likes}
             isBest={true}
           />
         ) : (

@@ -10,8 +10,6 @@ export default function HantanCardList({
 }: HTMLAttributes<HTMLDivElement>) {
   const { data, isLoading, error } = getHantans()
 
-  console.log(data)
-
   if (isLoading) {
     return <p>Loading...</p>
   }

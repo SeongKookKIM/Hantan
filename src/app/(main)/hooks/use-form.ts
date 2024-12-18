@@ -13,7 +13,7 @@ export const useFormHook = <T extends FieldValues>() => {
   const [findUserId, setFindUserId] = useState<string>()
 
   const queryClient = useQueryClient()
-  const { data: authData } = useAuth()
+  const { data: authData, logout } = useAuth()
 
   const {
     register,
@@ -112,7 +112,12 @@ export const useFormHook = <T extends FieldValues>() => {
       { url: '/api/users/findPassword/reset', body: { ...data, id } },
       {
         onSuccess: () => {
-          router.push('/login')
+          new Promise<void>((resolve) => {
+            window.confirm('비밀번호가 변경되었습니다. 다시 로그인해주세요.')
+            resolve()
+          })
+
+          logout()
         },
         onError: (error) => {
           console.warn('Reset Password Error:', error)

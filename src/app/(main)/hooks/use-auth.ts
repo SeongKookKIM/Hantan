@@ -21,7 +21,7 @@ export const useAuth = () => {
 
       queryClient.setQueryData(['auth'], { user: null, isLogin: false })
 
-      router.push('/')
+      router.push('/login')
     } catch (error) {
       console.error('Logout Error', error)
     }

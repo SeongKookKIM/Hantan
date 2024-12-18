@@ -17,14 +17,18 @@ export default function FindPassword() {
   } = useFormHook<UserFindPassword>()
 
   return (
-    <main className={'h-screenVH min-h-[600] flex flex-col gap-[100]'}>
+    <main
+      className={
+        'h-screenVH min-h-[600] flex flex-col justify-center items-center gap-5'
+      }
+    >
       {/* FindId Label */}
       <h4
         className={
           'w-full font-semibold text-2xl my-5 text-primary text-center'
         }
       >
-        Find Password
+        Reset Password
       </h4>
 
       <form

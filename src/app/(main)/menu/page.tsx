@@ -40,7 +40,7 @@ export default function Menu() {
 
       <ul className={'text-xl font-semibold my-5 flex flex-col gap-3'}>
         <li>
-          <Link href={'/'}>비밀번호 수정</Link>
+          <Link href={'/findUser/password'}>비밀번호 수정</Link>
         </li>
         <li>
           <Link href={'/'}>라이브러리 라이센스</Link>
@@ -49,7 +49,7 @@ export default function Menu() {
       <button
         type="button"
         className={
-          'w-full rounded py-3 text-xl font-semibold bg-secondary text-white'
+          'w-full rounded py-3 text-xl font-semibold bg-secondary text-white mb-5'
         }
         onClick={logout}
       >

@@ -31,7 +31,7 @@ export default function PasswordReset() {
     >
       {/* Reset Label */}
       <h4 className={'font-semibold text-2xl mb-5 text-primary'}>
-        Reset Password
+        Change Password
       </h4>
 
       <form

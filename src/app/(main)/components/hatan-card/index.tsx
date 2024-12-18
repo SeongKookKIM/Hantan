@@ -12,7 +12,6 @@ export interface HantanCardProps extends HTMLAttributes<HTMLDivElement> {
   date: string
   watched: number
   likes: number[]
-  isBest?: boolean
 }
 
 export default function HantanCard({
@@ -24,7 +23,7 @@ export default function HantanCard({
   date,
   watched,
   likes = [],
-  isBest = false,
+
   ...props
 }: HantanCardProps) {
   const { textAreaRef } = useTextArea({ value: content })
@@ -43,37 +42,29 @@ export default function HantanCard({
       ></textarea>
 
       {/* Like, Comment, Watched */}
-      {!isBest && (
-        <ul className="flex gap-4 mt-3">
-          <li className="common-icon">
-            <Heart
-              size={30}
-              color="#540075"
-              fill={
-                isLike.includes(authData.user?.id as number)
-                  ? '#540075'
-                  : 'none'
-              }
-              className="cursor-pointer"
-              onClick={handlerLikeButton}
-            />
-            <span>{isLike.length}</span>
-          </li>
-          <li className="common-icon">
-            <MessageCircle
-              size={30}
-              color="#540075"
-              className="cursor-pointer"
-            />
-            {/* post ID로 Comment테이블에서 가져오기 */}
-            <span>0</span>
-          </li>
-          <li className="common-icon">
-            <Eye size={30} color="#540075" className="cursor-default" />
-            <span>0</span>
-          </li>
-        </ul>
-      )}
+      <ul className="flex gap-4 mt-3">
+        <li className="common-icon">
+          <Heart
+            size={30}
+            color="#540075"
+            fill={
+              isLike.includes(authData.user?.id as number) ? '#540075' : 'none'
+            }
+            className="cursor-pointer"
+            onClick={handlerLikeButton}
+          />
+          <span>{isLike.length}</span>
+        </li>
+        <li className="common-icon">
+          <MessageCircle size={30} color="#540075" className="cursor-pointer" />
+          {/* post ID로 Comment테이블에서 가져오기 */}
+          <span>0</span>
+        </li>
+        <li className="common-icon">
+          <Eye size={30} color="#540075" className="cursor-default" />
+          <span>0</span>
+        </li>
+      </ul>
     </main>
   )
 }

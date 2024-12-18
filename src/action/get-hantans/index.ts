@@ -29,7 +29,6 @@ export const getHantans = () => {
     gcTime: 1000 * 60 * 5,
     staleTime: 1000 * 60,
     refetchOnMount: false,
-    refetchOnWindowFocus: false,
   })
 
   useScroll({ fetchNextPage, hasNextPage: hasNextPage, isFetchingNextPage })

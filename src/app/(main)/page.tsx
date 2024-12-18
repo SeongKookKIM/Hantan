@@ -24,7 +24,6 @@ export default function Main() {
             date={data.date}
             watched={data.watched}
             likes={data.likes}
-            isBest={true}
           />
         ) : (
           <div className={'w-full h-[100] flex items-center justify-center'}>

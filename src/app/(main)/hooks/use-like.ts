@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { useAuth } from './use-auth'
 import { usePostMutation } from '@/action/post-action'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const useLike = (likes: number[], postId: string) => {
   const { data: authData } = useAuth()
   const [isLike, setIsLike] = useState<number[]>(likes)
 
   const { mutate } = usePostMutation()
+  const queryClient = useQueryClient()
 
   const handlerLikeButton = async () => {
     if (!authData) {
@@ -30,6 +32,10 @@ export const useLike = (likes: number[], postId: string) => {
       {
         onSuccess: (result) => {
           console.log('Like updated successfully', result)
+
+          // TanstackQuery Data Reset
+          queryClient.resetQueries({ queryKey: ['bestPosts'] })
+          queryClient.resetQueries({ queryKey: ['posts'] })
         },
         onError: (error) => {
           console.error('Error updating like:', error)

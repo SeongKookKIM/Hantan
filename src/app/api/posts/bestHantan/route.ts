@@ -15,7 +15,7 @@ export async function GET() {
     `)
 
     if (rows.length === 0) {
-      return NextResponse.json({ data: null }, { status: 403 })
+      return NextResponse.json({ data: null }, { status: 201 })
     }
 
     return NextResponse.json({ data: rows[0] }, { status: 201 })

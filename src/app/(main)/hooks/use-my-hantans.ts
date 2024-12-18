@@ -13,7 +13,7 @@ export const useMyHatans = () => {
     queryKey: ['myPosts'],
     queryFn: async () => {
       const query = new URLSearchParams({
-        userId: authData.user!.userId.toString(),
+        userId: authData.user!.userId,
       }).toString()
 
       const response = await fetch(`/api/posts/myHantans?${query}`)

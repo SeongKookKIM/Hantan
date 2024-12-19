@@ -1,10 +1,10 @@
 'use client'
 
 import { PostWrite } from '@/schemas/post'
-import { useFormHook } from '../hooks/use-form'
-import InputLabel from '../components/input-field-label'
-import InputField from '../components/input-field'
-import ErrorMessage from '../components/input-field-error'
+import { useFormHook } from '../../hooks/use-form'
+import InputLabel from '../../components/input-field-label'
+import InputField from '../../components/input-field'
+import ErrorMessage from '../../components/input-field-error'
 
 export default function HantanWrite() {
   const {

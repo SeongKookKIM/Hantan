@@ -1,10 +1,10 @@
 'use client'
 
 import { UserFindId } from '@/schemas/user'
-import { useFormHook } from '../../hooks/use-form'
+import { useFormHook } from '../../../hooks/use-form'
 import Link from 'next/link'
-import InputField from '../../components/input-field'
-import ErrorMessage from '../../components/input-field-error'
+import InputField from '../../../components/input-field'
+import ErrorMessage from '../../../components/input-field-error'
 
 export default function FIndId() {
   const {

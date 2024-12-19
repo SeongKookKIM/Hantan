@@ -1,13 +1,13 @@
 'use client'
 
 import { PostDetail } from '@/schemas/post'
-import { useMyLikes } from '../hooks/use-my-likes'
+import HantanCard from '../../components/hatan-card'
+import { useMyHatans } from '../../hooks/use-my-hantans'
 import React from 'react'
-import HantanCard from '../components/hatan-card'
 import Image from 'next/image'
 
-export default function MyLikes() {
-  const { data, isLoading, error } = useMyLikes()
+export default function MyHantans() {
+  const { data, isLoading, error } = useMyHatans()
 
   if (isLoading) {
     return <p>Loading...</p>
@@ -19,7 +19,7 @@ export default function MyLikes() {
 
   return (
     <main className={'h-screenVH min-h-[600] mt-5'}>
-      <h4 className={'text-2xl font-bold'}>내가 좋아요 한 한탄</h4>
+      <h4 className={'text-2xl font-bold'}>내가 쓴 한탄</h4>
       {data.length !== 0 ? (
         <div className={'pb-10'}>
           {data.map((post: PostDetail) => (
@@ -45,9 +45,9 @@ export default function MyLikes() {
         >
           <Image src={'/sorry.jpg'} alt="Sorry_Logo" width={250} height={250} />
           <p className={'font-semibold text-lg text-primary text-center'}>
-            내가 좋아요 한 목록이 존재하지 않습니다...
+            내가 작성한 한 목록이 존재하지 않습니다...
             <br />
-            한탄 글에 좋아요를 눌러주세요!
+            한탄 글을 작성해주세요!
           </p>
         </div>
       )}

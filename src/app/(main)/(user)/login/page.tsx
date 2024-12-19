@@ -1,11 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { useFormHook } from '../hooks/use-form'
+import { useFormHook } from '../../hooks/use-form'
 import { UserLogin } from '@/schemas/user'
-import InputField from '../components/input-field'
-import ErrorMessage from '../components/input-field-error'
-import InputLabel from '../components/input-field-label'
+import InputField from '../../components/input-field'
+import ErrorMessage from '../../components/input-field-error'
+import InputLabel from '../../components/input-field-label'
 
 export default function Login() {
   const {

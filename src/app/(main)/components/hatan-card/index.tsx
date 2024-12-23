@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import { useTextArea } from '../../hooks/use-textarea-height'
 import { Eye, Heart, MessageCircle } from 'lucide-react'
 import { useLike } from '../../hooks/use-like'
+import Link from 'next/link'
 
 export interface HantanCardProps extends HTMLAttributes<HTMLDivElement> {
   id: string
@@ -32,14 +33,16 @@ export default function HantanCard({
 
   return (
     <main className={cn(className)} {...props}>
-      <textarea
-        name="bestHantan"
-        ref={textAreaRef}
-        typeof="text"
-        defaultValue={content}
-        readOnly={true}
-        className={'text-area'}
-      ></textarea>
+      <Link href={`/${id}`}>
+        <textarea
+          name="bestHantan"
+          ref={textAreaRef}
+          typeof="text"
+          defaultValue={content}
+          readOnly={true}
+          className={'text-area'}
+        ></textarea>
+      </Link>
 
       {/* Like, Comment, Watched */}
       <ul className="flex gap-4 mt-3">

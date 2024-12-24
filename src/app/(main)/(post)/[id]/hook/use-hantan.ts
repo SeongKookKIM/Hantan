@@ -7,7 +7,10 @@ export const useHantan = (id: string) => {
     queryFn: async () => {
       const res = await getHantan(id)
 
-      return res
+      if (res.status === 'error') {
+        throw new Error(res.error)
+      }
+      return res.data
     },
   })
 }

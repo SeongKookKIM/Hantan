@@ -16,3 +16,8 @@ export const postWriteSchema = z.object({
   content: z.string(),
 })
 export type PostWrite = z.infer<typeof postWriteSchema>
+
+export const postCommentSchema = z.object({
+  comment: z.string(),
+})
+export type PostComment = z.infer<typeof postCommentSchema>

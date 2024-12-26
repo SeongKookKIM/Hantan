@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { useAuth } from './use-auth'
 import { v4 as uuidv4 } from 'uuid'
+import { PostDetail } from '@/schemas/post'
 
 export const useFormHook = <T extends FieldValues>() => {
   const router = useRouter()
@@ -174,6 +175,13 @@ export const useFormHook = <T extends FieldValues>() => {
     )
   }
 
+  // Hantan Detail Comment
+  const handlerPostComment = async (data: T, postDetailData: PostDetail) => {
+    console.log('Data: ', data)
+    console.log('PostDetailData: ', postDetailData)
+    console.log('UserData: ', authData)
+  }
+
   return {
     register,
     handleSubmit,
@@ -187,6 +195,7 @@ export const useFormHook = <T extends FieldValues>() => {
     handlerFindUserPassword,
     handlerResetPassword,
     handlerPostWrite,
+    handlerPostComment,
     isFind,
     findUserId,
   }

@@ -21,3 +21,10 @@ export const postCommentSchema = z.object({
   comment: z.string(),
 })
 export type PostComment = z.infer<typeof postCommentSchema>
+
+export const postCommentDetailSchema = z.object({
+  postId: z.string(),
+  userUUID: z.number(),
+  content: z.string(),
+})
+export type PostCommentDetail = z.infer<typeof postCommentDetailSchema>

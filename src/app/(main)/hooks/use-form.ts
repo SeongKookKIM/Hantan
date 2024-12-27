@@ -177,9 +177,25 @@ export const useFormHook = <T extends FieldValues>() => {
 
   // Hantan Detail Comment
   const handlerPostComment = async (data: T, postDetailData: PostDetail) => {
-    console.log('Data: ', data)
-    console.log('PostDetailData: ', postDetailData)
-    console.log('UserData: ', authData)
+    const postUUID = postDetailData.id
+    const userUUID = authData.user?.id
+
+    await new Promise((r) => setTimeout(r, 1000))
+
+    await mutate(
+      {
+        url: '/api/posts/comment',
+        body: { ...data, postUUID, userUUID },
+      },
+      {
+        onSuccess: (result) => {
+          console.log(result.message)
+        },
+        onError: (error) => {
+          console.log('Commnet Error', error)
+        },
+      }
+    )
   }
 
   return {

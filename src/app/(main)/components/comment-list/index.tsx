@@ -1,10 +1,26 @@
 import { cn } from '@/lib/utils'
 import { HTMLAttributes } from 'react'
+import { useComment } from '../../(post)/[id]/hook/use-comment'
+
+export interface HantanCommentListProps extends HTMLAttributes<HTMLDivElement> {
+  postUUID: string
+}
 
 export default function HantanCommentList({
   className,
+  postUUID,
   ...props
-}: HTMLAttributes<HTMLDivElement>) {
+}: HantanCommentListProps) {
+  const { data, isLoading, error } = useComment(postUUID)
+
+  if (isLoading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
   return (
     <div className={cn(className, 'mt-10')} {...props}>
       <ul>

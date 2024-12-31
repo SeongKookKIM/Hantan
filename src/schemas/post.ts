@@ -25,6 +25,7 @@ export type PostComment = z.infer<typeof postCommentSchema>
 export const postCommentDetailSchema = z.object({
   postId: z.string(),
   userUUID: z.number(),
+  date: z.string(),
   content: z.string(),
 })
 export type PostCommentDetail = z.infer<typeof postCommentDetailSchema>

@@ -24,7 +24,6 @@ export default function HantanCard({
   date,
   watched,
   likes = [],
-
   ...props
 }: HantanCardProps) {
   const { textAreaRef } = useTextArea({ value: content })

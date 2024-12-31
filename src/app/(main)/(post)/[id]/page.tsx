@@ -116,7 +116,7 @@ export default function HantansDetailPage({ params }: HantansDetailPageProps) {
         </div>
 
         {/* 댓글 리스트 */}
-        <HantanCommentList />
+        <HantanCommentList postUUID={postDetailData.id} />
       </div>
     </main>
   )

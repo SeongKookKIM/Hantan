@@ -189,6 +189,7 @@ export const useFormHook = <T extends FieldValues>() => {
       },
       {
         onSuccess: (result) => {
+          queryClient.resetQueries({ queryKey: ['comment', postUUID] })
           console.log(result.message)
         },
         onError: (error) => {

@@ -11,8 +11,6 @@ export const useComment = (postUUID: string) => {
         throw new Error(res.error)
       }
 
-      console.log('UseComment: ', res)
-
       return res.data
     },
   })

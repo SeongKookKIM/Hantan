@@ -28,4 +28,5 @@ export const postCommentDetailSchema = z.object({
   date: z.string(),
   content: z.string(),
 })
-export type PostCommentDetail = z.infer<typeof postCommentDetailSchema>
+export const postCommentDetailsArraySchema = z.array(postCommentDetailSchema)
+export type PostCommentDetail = z.infer<typeof postCommentDetailsArraySchema>

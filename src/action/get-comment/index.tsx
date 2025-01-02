@@ -1,11 +1,14 @@
 'use server'
 
-import { PostCommentDetail, postCommentDetailSchema } from '@/schemas/post'
+import {
+  PostCommentDetail,
+  postCommentDetailsArraySchema,
+} from '@/schemas/post'
 
 export type GetHantanCommentResponse =
   | {
       status: 'success'
-      data: PostCommentDetail
+      data: PostCommentDetail | null
     }
   | {
       status: 'error'
@@ -25,9 +28,16 @@ export const getHantanComment = async (
 
     const result = await response.json()
 
-    const { success, data } = postCommentDetailSchema.safeParse(result.data)
+    if (!result.data) {
+      return {
+        status: 'success',
+        data: null,
+      }
+    }
 
-    console.log('getHantanComment: ', data)
+    const { success, data } = postCommentDetailsArraySchema.safeParse(
+      result.data
+    )
 
     if (success) {
       return {
@@ -42,6 +52,7 @@ export const getHantanComment = async (
     }
   } catch (error) {
     if (error instanceof Error) {
+      console.warn('Eroro입니다만..')
       return {
         status: 'error',
         error: error.message,

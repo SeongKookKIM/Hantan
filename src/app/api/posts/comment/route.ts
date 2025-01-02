@@ -6,6 +6,8 @@ export async function POST(req: NextRequest) {
   try {
     const { comment, postUUID, userUUID } = await req.json()
 
+    console.log('Comment확인:', comment, postUUID, userUUID)
+
     const [result] = await db.query(
       'INSERT INTO COMMENT (postId, userUUID, content) VALUES (?, ?, ?)',
       [postUUID, userUUID, comment]
@@ -43,7 +45,7 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { message: 'Success Get Post Comments Data', data: comments[0] },
+      { message: 'Success Get Post Comments Data', data: comments },
       { status: 201 }
     )
   } catch (error) {
